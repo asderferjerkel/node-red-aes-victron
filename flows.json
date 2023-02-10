@@ -1,0 +1,312 @@
+[
+    {
+        "id": "4bc694a366f31a8e",
+        "type": "trigger",
+        "z": "1a658512f8a93a4b",
+        "name": "disable for 1m",
+        "op1": "false",
+        "op2": "true",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 320,
+        "y": 1480,
+        "wires": [
+            [
+                "b9aecf287f15b1a6",
+                "db15170c6065e017"
+            ]
+        ]
+    },
+    {
+        "id": "b9aecf287f15b1a6",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Dis/enable buttons",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 1520,
+        "wires": [
+            [
+                "eb540d424137a301",
+                "5a1e056e5d4b654d"
+            ]
+        ]
+    },
+    {
+        "id": "eb540d424137a301",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "2170bb4933797440",
+        "order": 9,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "1 min",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#A6BBCF",
+        "className": "",
+        "icon": "flash_on",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 1580,
+        "wires": [
+            [
+                "4bc694a366f31a8e"
+            ]
+        ]
+    },
+    {
+        "id": "5a76b99d0d888ace",
+        "type": "ui_text",
+        "z": "1a658512f8a93a4b",
+        "group": "2170bb4933797440",
+        "order": 7,
+        "width": "2",
+        "height": "1",
+        "name": "",
+        "label": "Eco",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 670,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "aaf15399d94e43bb",
+        "type": "inject",
+        "z": "1a658512f8a93a4b",
+        "name": "Startup",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 320,
+        "y": 1440,
+        "wires": [
+            [
+                "b9aecf287f15b1a6",
+                "db15170c6065e017"
+            ]
+        ]
+    },
+    {
+        "id": "5a1e056e5d4b654d",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "2170bb4933797440",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "1 hr",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#A6BBCF",
+        "className": "",
+        "icon": "flash_on",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 1620,
+        "wires": [
+            [
+                "db6efdc14d171d94"
+            ]
+        ]
+    },
+    {
+        "id": "db6efdc14d171d94",
+        "type": "trigger",
+        "z": "1a658512f8a93a4b",
+        "name": "disable for 1h",
+        "op1": "false",
+        "op2": "true",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 320,
+        "y": 1520,
+        "wires": [
+            [
+                "b9aecf287f15b1a6",
+                "db15170c6065e017"
+            ]
+        ]
+    },
+    {
+        "id": "be3acbb1a76926bb",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "0 = on, 1 = off",
+        "func": "msg.payload = (msg.payload === 1) ? \"off\" : \"on\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1380,
+        "wires": [
+            [
+                "5a76b99d0d888ace"
+            ]
+        ]
+    },
+    {
+        "id": "1fa1ee1c2fd645d4",
+        "type": "victron-output-relay",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Relay/1/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus device"
+        },
+        "pathObj": {
+            "path": "/Relay/1/State",
+            "type": "enum",
+            "name": "Venus relay 2 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "name": "AES relay",
+        "x": 760,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "db15170c6065e017",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "false = 1, true = 0",
+        "func": "msg.payload = (msg.payload === false) ? 1 : 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1480,
+        "wires": [
+            [
+                "1fa1ee1c2fd645d4"
+            ]
+        ]
+    },
+    {
+        "id": "f4d4742cf6f4dd63",
+        "type": "victron-input-relay",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Relay/1/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Relay/1/State",
+            "type": "enum",
+            "name": "Venus relay 2 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            }
+        },
+        "initial": "",
+        "name": "AES relay state",
+        "x": 100,
+        "y": 1380,
+        "wires": [
+            [
+                "6665a2152008087e"
+            ]
+        ]
+    },
+    {
+        "id": "6665a2152008087e",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 1380,
+        "wires": [
+            [
+                "be3acbb1a76926bb"
+            ]
+        ]
+    },
+    {
+        "id": "2170bb4933797440",
+        "type": "ui_group",
+        "name": "Battery",
+        "tab": "53507447dda5a712",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "53507447dda5a712",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
